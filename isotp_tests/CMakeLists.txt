@@ -27,6 +27,7 @@ foreach(test_name IN LISTS test_names)
 		${CMAKE_CURRENT_SOURCE_DIR}/..
 	)
 	add_test(NAME cpp_test_${test_name} COMMAND ${test_name})
+	target_compile_options(${test_name} PRIVATE -Wall -Wextra)
 endforeach()
 
 # Enable testing

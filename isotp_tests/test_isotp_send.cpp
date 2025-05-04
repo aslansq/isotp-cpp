@@ -30,7 +30,6 @@ public:
 
 int main(void)
 {
-	uint16_t out_size = 0;
 	IsoTpTest isotp;
 	uint8_t send_buffer[1024];
 	uint8_t recv_buffer[1024];

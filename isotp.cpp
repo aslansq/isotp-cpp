@@ -227,6 +227,7 @@ IsoTpRet IsoTp::receive_consecutive_frame(IsoTpCanMessage *message, uint8_t len)
 }
 IsoTpRet IsoTp::receive_flow_control_frame(IsoTpCanMessage *message, uint8_t len)
 {
+	(void) message;
 	/* check message length */
 	if (len < 3) {
 		user_debug("Flow control frame too short.");
@@ -240,10 +241,9 @@ IsoTpRet IsoTp::receive_flow_control_frame(IsoTpCanMessage *message, uint8_t len
 ///                 PUBLIC FUNCTIONS                ///
 ///////////////////////////////////////////////////////
 
-IsoTp::IsoTp() :
-	link({0})
+IsoTp::IsoTp()
 {
-	// Constructor
+	memset(&link, 0, sizeof(link));
 }
 
 void IsoTp::init(
