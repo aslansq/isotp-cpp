@@ -42,25 +42,24 @@ int main(void)
 		sizeof(recv_buffer)
 	);
 
-	// diag sess pos response
-	uint8_t diagSessPosResponse[] = {
-		0x50, 0x03, 0x0b, 0xb8, 0x01, 0xf4
+	uint8_t diagSessReqExpected[] = {
+		0x10, 0x03
 	};
 
-	uint8_t diagSessPosResponseExpected[] = {
-		0x06, 0x50, 0x03, 0x0b, 0xb8, 0x01, 0xf4
+	uint8_t diagSessReq[] = {
+		0x02, 0x10, 0x03, 0xcc, 0xcc, 0xcc, 0xcc, 0xcc
 	};
 
-	isotp.send(diagSessPosResponse, sizeof(diagSessPosResponse));
+	isotp.on_can_message(diagSessReq, sizeof(diagSessReq));
 
-	// Check if the sent data matches the expected data
-	assert(_arbitration_id == 0x123);
-	assert(_size == sizeof(diagSessPosResponseExpected));
-	for (uint8_t i = 0; i < sizeof(diagSessPosResponseExpected); i++)
+	isotp.poll();
+	isotp.receive(_data, sizeof(_data), &out_size);
+
+	assert(out_size == sizeof(diagSessReqExpected));
+	for (uint8_t i = 0; i < sizeof(diagSessReqExpected); i++)
 	{
-		assert(_data[i] == diagSessPosResponseExpected[i]);
+		assert(_data[i] == diagSessReqExpected[i]);
 	}
-	
 
 	return 0;
 }
