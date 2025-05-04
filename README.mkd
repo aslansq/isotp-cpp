@@ -1,3 +1,5 @@
+![all_builds](https://github.com/aslansq/isotp-cpp/actions/workflows/cmake-single-platform.yml/badge.svg)
+
 ISO-TP (ISO 15765-2) Support Library in CPP
 ================================
 
